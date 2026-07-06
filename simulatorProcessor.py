@@ -312,7 +312,14 @@ class Interface:
             messagebox.showinfo("Sucesso!", "Programa importado e sincronizado com a RAM!")
 
     def carregar_do_editor(self):
+        # Pega o texto do editor
         texto_bruto = self.text_editor.get("1.0", tk.END)
+        
+        # Salva o que foi digitado
+        with open("entrada.txt", "w") as f:
+            f.write(texto_bruto.strip() + "\n")
+            
+        # Converte o texto em uma lista e salva na RAM
         linhas = texto_bruto.split('\n')
         self.processador.carregar_programa_lista(linhas)
         self.atualizar_tela()
@@ -322,8 +329,13 @@ class Interface:
         try:
             continuar = self.processador.passo()
             self.atualizar_tela()
+            
+            # Se 'continuar' for False, significa que a máquina bateu no limite ou achou o HALT
             if not continuar:
-                messagebox.showinfo("Fim!", "Execução finalizada ou instrução HALT encontrada.")
+                self.processador.gerar_arquivos_saida()
+                
+                messagebox.showinfo("Fim!", "Execução finalizada. Arquivos de saída (.txt) gerados com sucesso no diretório atual!")
+                
         except Exception as e:
             messagebox.showerror("Erro de Execução!", f"Falha na execução da instrução.\nIR: {self.processador.ir}\nErro: {str(e)}")
 
