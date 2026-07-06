@@ -1,17 +1,18 @@
-# 🟣 Codificador e Decodificador de Hamming 🟡
+# 🟢 Simulador de Processador - ARQ. COMP. 🟡
 
-Projeto desenvolvido para a disciplina de Arquitetura de Computadores. Esta aplicação implementa o Algoritmo de Hamming para codificação e decodificação de mensagens binárias de até 8 bits, permitindo a detecção e correção de erros de 1 bit.
+Esta aplicação implementa um simulador visual de processador baseado no modelo de Von Neumann (semelhante ao simulador K&S), capaz de executar um conjunto de instruções em Assembly e demonstrar na prática o ciclo de *Fetch*, *Decode* e *Execute*.
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Python 3:** Lógica backend e manipulação de bits (bitwise operations e XOR).
-* **Tkinter:** Interface gráfica nativa customizada.
+* **Python 3:** Lógica backend do hardware simulado, encapsulamento em Orientação a Objetos e manipulação de arquivos de entrada e saída.
+* **Tkinter:** Interface gráfica nativa customizada construída como uma IDE com estética de terminal retrô.
 
 ## ⚙️ Funcionalidades
 
-* **Codificação:** Calcula os bits de paridade dinamicamente e os intercala na mensagem original (exibindo-os entre colchetes).
-* **Decodificação:** Recebe uma mensagem codificada, recalcula a paridade de cada grupo e, caso haja erro de transmissão, detecta a posição exata, corrige o bit invertido e extrai a mensagem original.
-* **Validação de Entrada:** Bloqueio de caracteres não-binários e limite estrito de 8 bits para a mensagem original.
+* **IDE Integrada e Sincronização:** Editor de texto próprio para escrita livre ou importação de código Assembly (validado estritamente para o arquivo `entrada.txt`), com injeção direta na memória RAM simulada.
+* **Execução Visual (Step-by-Step):** Acompanhamento do *datapath* em tempo real. O usuário pode visualizar alterações simultâneas no *Program Counter* (PC), *Instruction Register* (IR), gavetas da Memória RAM e Banco de Registradores.
+* **ALU e Desvios Condicionais:** Suporte a operações lógicas e aritméticas (ADD, SUB, AND, OR) conectadas a um sistema reativo de *Flags* (ZERO e NEG). Permite a execução complexa de rotinas com saltos condicionais (BZERO, BNEG) e incondicionais (BRANCH).
+* **Geração de Core Dump (Snapshot):** Ao encontrar a instrução HALT, o sistema exporta automaticamente três arquivos físicos de saída (`unidade_controle.txt`, `banco_registradores.txt` e `memoria_ram.txt`), registrando o estado final do hardware para auditoria.
 
 ## 💻 Como executar no Linux
 
@@ -24,5 +25,14 @@ sudo apt update && sudo apt install python3-tk
 Execute o arquivo principal:
 
 ```bash
-python3 hamming.py
+python3 simulatorProcessor.py
 ```
+
+## ✒️ Autoria
+
+Projeto desenvolvido em dupla para a disciplina de Arquitetura de Computadores - 4º semestre 2026/1.
+
+* **Isadora Martins**
+* **Pedro Sperandio**
+
+Estudantes de Engenharia de Computação do IFMS Campus Três Lagoas.
